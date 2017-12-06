@@ -6,3 +6,12 @@ E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bi
 E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.csprojResolveAssemblyReference.cache
 E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.exe
 E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.pdb
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.TestSocketServer.exe.config
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.TestSocketServer.exe
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.TestSocketServer.pdb
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.dll
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.ToolHelpers.dll
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.pdb
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.csprojResolveAssemblyReference.cache
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.exe
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.pdb

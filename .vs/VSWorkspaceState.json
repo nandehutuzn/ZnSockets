@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ZnSocketSolution",
+    "\\ZnSocketSolution\\Zn.Core.Sockets",
+    "\\ZnSocketSolution\\Zn.Core.Sockets\\Tcp",
+    "\\ZnSocketSolution\\Zn.Core.Sockets\\Tcp\\Server",
+    "\\ZnSocketSolution\\Zn.Core.Sockets\\Tcp\\Server\\APM"
+  ],
+  "SelectedNode": "\\ZnSocketSolution\\Zn.Core.Sockets\\Tcp\\Server\\APM\\TcpSocketServerConfiguration.cs",
+  "PreviewInSolutionExplorer": false
+}

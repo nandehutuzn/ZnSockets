@@ -2,3 +2,9 @@ E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets\bin\Debug\Zn.Core.S
 E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets\bin\Debug\Zn.Core.Sockets.pdb
 E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets\obj\Debug\Zn.Core.Sockets.dll
 E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets\obj\Debug\Zn.Core.Sockets.pdb
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets\bin\Debug\Zn.Core.Sockets.dll
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets\bin\Debug\Zn.Core.Sockets.pdb
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets\bin\Debug\Zn.Core.ToolHelpers.dll
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets\obj\Debug\Zn.Core.Sockets.csprojResolveAssemblyReference.cache
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets\obj\Debug\Zn.Core.Sockets.dll
+E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets\obj\Debug\Zn.Core.Sockets.pdb

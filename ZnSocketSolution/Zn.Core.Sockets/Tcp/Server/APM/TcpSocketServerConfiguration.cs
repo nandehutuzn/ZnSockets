@@ -21,7 +21,31 @@ namespace Zn.Core.Sockets
 
         public TcpSocketServerConfiguration(ISegmentBufferManager bufferManager)
         {
+            BufferManager = bufferManager;
 
+            ReceiveBufferSize = 8192;
+            SendBufferSize = 8192;
+            ReceiveTimeout = TimeSpan.Zero;
+            SendTimeout = TimeSpan.Zero;
+            NoDelay = true;
+            LingerState = new LingerOption(false, 0);
+            KeepAlive = false;
+            KeepAliveInterval = TimeSpan.FromSeconds(5);
+            ReuseAddress = false;
+
+            PendingConnectionBacklog = 200;
+            AllowNatTraversal = true;
+
+            SslEnabled = false;
+            SslServerCertificate = null;
+            SslEncryptionPolicy = EncryptionPolicy.RequireEncryption;
+            SslEnabledProtocols = SslProtocols.Ssl3 | SslProtocols.Tls;
+            SslClientCertificateRequired = true;
+            SslCheckCertificateRevocation = false;
+            SslPolicyErrorsBypassed = false;
+
+            ConnectTimeout = TimeSpan.FromSeconds(15);
+            FrameBuilder = new LengthPrefixedFrameBuilder();
         }
 
         public ISegmentBufferManager BufferManager { get; set; }

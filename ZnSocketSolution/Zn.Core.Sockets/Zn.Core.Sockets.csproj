@@ -40,6 +40,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Zn.Core.ToolHelpers">
+      <HintPath>..\DLL\Zn.Core.ToolHelpers.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffer\ISegmentBufferManager.cs" />
@@ -47,14 +50,21 @@
     <Compile Include="Buffer\UnableToAllocateBufferException.cs" />
     <Compile Include="Buffer\UnableToCreateMemoryException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tcp\Framing\Base\FrameBuilder.cs" />
     <Compile Include="Tcp\Framing\Base\IFrameBuilder.cs" />
     <Compile Include="Tcp\Framing\Base\IFrameDecoder.cs" />
     <Compile Include="Tcp\Framing\Base\IFrameEncoder.cs" />
+    <Compile Include="Tcp\Framing\LengthPrefixedFrameBuilder.cs" />
+    <Compile Include="Tcp\Server\APM\EventArgs\TcpClientConnectedEventArgs.cs" />
+    <Compile Include="Tcp\Server\APM\EventArgs\TcpClientDataReceivedEventArgs.cs" />
+    <Compile Include="Tcp\Server\APM\EventArgs\TcpClientDisconnectedEventArgs.cs" />
+    <Compile Include="Tcp\Server\APM\TcpSocketServer.cs" />
     <Compile Include="Tcp\Server\APM\TcpSocketServerConfiguration.cs" />
+    <Compile Include="Tcp\Server\APM\TcpSocketSession.cs" />
+    <Compile Include="Tcp\TcpSocketConnectionState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tcp\Client\" />
-    <Folder Include="Tcp\Server\APM\EventArgs\" />
     <Folder Include="Tcp\Server\EAP\" />
     <Folder Include="Tcp\Server\TAP\" />
   </ItemGroup>
