@@ -1,0 +1,8 @@
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.TestSocketServer.exe.config
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.TestSocketServer.exe
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.TestSocketServer.pdb
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.dll
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\bin\Debug\Zn.Core.Sockets.pdb
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.csprojResolveAssemblyReference.cache
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.exe
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketServer\obj\Debug\Zn.Core.Sockets.TestSocketServer.pdb

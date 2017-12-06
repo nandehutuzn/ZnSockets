@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zn.Core.Sockets", "Zn.Core.Sockets\Zn.Core.Sockets.csproj", "{A6FC4863-FB08-41B7-A8CE-2F2FF680B92E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BACF7354-1FF4-4233-A5AC-033EBE54EDD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tcp", "Tcp", "{F881FF82-106D-471B-A974-6F8417DA3474}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APM", "APM", "{DAAB3736-F517-4B8A-B36F-CDC7BFD7EDA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zn.Core.Sockets.TestSocketClient", "Zn.Core.Sockets.TestSocketClient\Zn.Core.Sockets.TestSocketClient.csproj", "{3B091A2D-2D39-4B53-AB59-2E8FC6B97372}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zn.Core.Sockets.TestSocketServer", "Zn.Core.Sockets.TestSocketServer\Zn.Core.Sockets.TestSocketServer.csproj", "{487884EA-63FB-4213-882C-ECEF5826227D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6FC4863-FB08-41B7-A8CE-2F2FF680B92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6FC4863-FB08-41B7-A8CE-2F2FF680B92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6FC4863-FB08-41B7-A8CE-2F2FF680B92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6FC4863-FB08-41B7-A8CE-2F2FF680B92E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B091A2D-2D39-4B53-AB59-2E8FC6B97372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B091A2D-2D39-4B53-AB59-2E8FC6B97372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B091A2D-2D39-4B53-AB59-2E8FC6B97372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B091A2D-2D39-4B53-AB59-2E8FC6B97372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487884EA-63FB-4213-882C-ECEF5826227D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487884EA-63FB-4213-882C-ECEF5826227D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487884EA-63FB-4213-882C-ECEF5826227D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487884EA-63FB-4213-882C-ECEF5826227D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F881FF82-106D-471B-A974-6F8417DA3474} = {BACF7354-1FF4-4233-A5AC-033EBE54EDD8}
+		{DAAB3736-F517-4B8A-B36F-CDC7BFD7EDA8} = {F881FF82-106D-471B-A974-6F8417DA3474}
+		{3B091A2D-2D39-4B53-AB59-2E8FC6B97372} = {DAAB3736-F517-4B8A-B36F-CDC7BFD7EDA8}
+		{487884EA-63FB-4213-882C-ECEF5826227D} = {DAAB3736-F517-4B8A-B36F-CDC7BFD7EDA8}
+	EndGlobalSection
+EndGlobal
