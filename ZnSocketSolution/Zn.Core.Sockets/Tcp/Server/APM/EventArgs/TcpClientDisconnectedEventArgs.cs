@@ -12,7 +12,9 @@ namespace Zn.Core.Sockets
 
         public TcpClientDisconnectedEventArgs(TcpSocketSession session)
         {
-            Session = session ?? throw new ArgumentNullException("session");
+            if(session == null)
+                throw new ArgumentNullException("session");
+            Session = session;
         }
 
         public override string ToString()

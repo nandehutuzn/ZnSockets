@@ -15,3 +15,4 @@ E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketClient\bin
 E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketClient\obj\Debug\Zn.Core.Sockets.TestSocketClient.csprojResolveAssemblyReference.cache
 E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketClient\obj\Debug\Zn.Core.Sockets.TestSocketClient.exe
 E:\VS2013\Github\ZnSockets\ZnSocketSolution\Zn.Core.Sockets.TestSocketClient\obj\Debug\Zn.Core.Sockets.TestSocketClient.pdb
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestSocketClient\bin\Debug\Zn.Core.ToolHelpers.dll

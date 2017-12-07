@@ -10,8 +10,13 @@ namespace Zn.Core.Sockets
     {
         public FrameBuilder(IFrameEncoder encoder, IFrameDecoder decoder)
         {
-            Encoder = encoder ?? throw new ArgumentNullException("encoder");
-            Decoder = decoder ?? throw new ArgumentNullException("decoder");
+            if(encoder == null)
+                throw new ArgumentNullException("encoder");
+            if (decoder == null)
+                throw new ArgumentNullException("decoder");
+
+            Encoder = encoder;
+            Decoder = decoder;
         }
 
         public IFrameEncoder Encoder { get; private set; }

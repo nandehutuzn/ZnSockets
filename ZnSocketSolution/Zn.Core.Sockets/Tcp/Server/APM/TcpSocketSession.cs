@@ -39,10 +39,19 @@ namespace Zn.Core.Sockets
         public TcpSocketSession(TcpClient tcpClient, TcpSocketServerConfiguration configuration
             , ISegmentBufferManager bufferManager, TcpSocketServer server)
         {
-            _tcpClient = tcpClient?? throw new ArgumentNullException("tcpClient"); 
-            _configuration = configuration ?? throw new ArgumentNullException("configuration"); 
-            _bufferManager = bufferManager?? throw new ArgumentNullException("bufferManager"); 
-            _server = server ?? throw new ArgumentNullException("server");
+            if (tcpClient == null)
+                throw new ArgumentNullException("tcpClient");
+            if (configuration == null)
+                throw new ArgumentNullException("configuration");
+            if (bufferManager == null)
+                throw new ArgumentNullException("bufferManager");
+            if (server == null)
+                throw new ArgumentNullException("server");
+
+            _tcpClient = tcpClient;
+            _configuration = configuration;
+            _bufferManager = bufferManager;
+            _server = server;
 
             _sessionKey = Guid.NewGuid().ToString();
             this.StartTime = DateTime.UtcNow;
@@ -112,12 +121,41 @@ namespace Zn.Core.Sockets
             try
             {
 
+                _stream = NegotiateStream(_tcpClient.GetStream());
 
+                if (_receiveBuffer == default(ArraySegment<byte>))
+                    _receiveBuffer = _bufferManager.BorrowBuffer();
+
+                _receiveBufferOffset = 0;
+
+                if (Interlocked.CompareExchange(ref _state, _connected, _connecting) != _connecting)
+                {
+                    Close(false); //connecting with wrong state
+                    throw new ObjectDisposedException("This tcp socket session has been disposed after connected.");
+                }
+
+                bool isErrorOccurredInUserSide = false;
+                try
+                {
+                    _server.RaiseClientConnected(this);
+                }
+                catch (Exception ex)
+                {
+                    isErrorOccurredInUserSide = true;
+                    HandleUserSideError(ex);
+                }
+
+                if (!isErrorOccurredInUserSide)
+                {
+                    ContinueReadBuffer();
+                }
+                else
+                    Close(true); //user side handle tcp connection error occurred
             }
-            catch (Exception ex)
+            catch (Exception ex)// catch exceptions then log then re-throw
             {
                 _log.Exception(ex);
-                Close(true);
+                Close(true); // handle tcp connection error occurred
                 throw;
             }
         }
@@ -136,7 +174,14 @@ namespace Zn.Core.Sockets
 
             if (shallNotifyUserSide)
             {
-                
+                try
+                {
+                    _server.RaiseClientDisconnected(this);
+                }
+                catch (Exception ex)
+                {
+                    HandleUserSideError(ex);
+                }
             }
 
             Clean();
@@ -257,6 +302,324 @@ namespace Zn.Core.Sockets
                 sslStream.CipherStrength));
 
             return sslStream;
+        }
+
+        private void ContinueReadBuffer()
+        {
+            try
+            {
+                _stream.BeginRead(_receiveBuffer.Array,
+                    _receiveBuffer.Offset + _receiveBufferOffset,
+                    _receiveBuffer.Count - _receiveBufferOffset,
+                    HandleDataReceived, _stream);
+            }
+            catch (Exception ex)
+            {
+                HandleReceiveOperationException(ex);
+                throw;
+            }
+        }
+
+        private void HandleDataReceived(IAsyncResult ar)
+        {
+            if (State != TcpSocketConnectionState.Connected || _stream == null)
+            {
+                Close(false);// receive callback
+                return;
+            }
+
+            try
+            {
+                int numberOfReadBytes = 0;
+                try
+                {
+                    // The EndRead method blocks until data is available. The EndRead method reads 
+                    // as much data as is available up to the number of bytes specified in the size 
+                    // parameter of the BeginRead method. If the remote host shuts down the Socket 
+                    // connection and all available data has been received, the EndRead method 
+                    // completes immediately and returns zero bytes.
+                    numberOfReadBytes = _stream.EndRead(ar);
+                }
+                catch
+                {
+                    // unable to read data from transport connection, 
+                    // the existing connection was forcibly closed by remote host
+                    numberOfReadBytes = 0;
+                }
+
+                if (numberOfReadBytes == 0)
+                {
+                    Close(true);// receive 0-byte means connection has been closed
+                    return;
+                }
+
+                ReceiveBuffer(numberOfReadBytes);
+                ContinueReadBuffer();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    HandleReceiveOperationException(ex);
+                }
+                catch (Exception innnerException)
+                {
+                    _log.Exception(innnerException);
+                }
+            }
+        }
+
+        private void ReceiveBuffer(int receiveCount)
+        {
+            // TCP guarantees delivery of all packets in the correct order. 
+            // But there is no guarantee that one write operation on the sender-side will result in 
+            // one read event on the receiving side. One call of write(message) by the sender 
+            // can result in multiple messageReceived(session, message) events on the receiver; 
+            // and multiple calls of write(message) can lead to a single messageReceived event.
+            // In a stream-based transport such as TCP/IP, received data is stored into a socket receive buffer. 
+            // Unfortunately, the buffer of a stream-based transport is not a queue of packets but a queue of bytes. 
+            // It means, even if you sent two messages as two independent packets, 
+            // an operating system will not treat them as two messages but as just a bunch of bytes. 
+            // Therefore, there is no guarantee that what you read is exactly what your remote peer wrote.
+            // There are three common techniques for splitting the stream of bytes into messages:
+            //   1. use fixed length messages
+            //   2. use a fixed length header that indicates the length of the body
+            //   3. using a delimiter; for example many text-based protocols append
+            //      a newline (or CR LF pair) after every message.
+            int frameLength;
+            byte[] payload;
+            int payloadOffset;
+            int payloadCount;
+            int consumedLength = 0;
+
+            SegmentBufferDeflector.ReplaceBuffer(_bufferManager, ref _receiveBuffer, ref _receiveBufferOffset, receiveCount);
+
+            while (true)
+            {
+                frameLength = 0;
+                payload = null;
+                payloadOffset = 0;
+                payloadCount = 0;
+
+                if (_configuration.FrameBuilder.Decoder.TryDecodeFrame(
+                    _receiveBuffer.Array,
+                    _receiveBuffer.Offset + consumedLength,
+                    _receiveBufferOffset - consumedLength,
+                    out frameLength, out payload, out payloadOffset, out payloadCount))
+                {
+                    try
+                    {
+                        _server.RaiseClientDataReceived(this, payload, payloadOffset, payloadCount);
+                    }
+                    catch (Exception ex)// catch all exceptions from out-side
+                    {
+                        HandleUserSideError(ex);
+                    }
+                    finally
+                    {
+                        consumedLength += frameLength;
+                    }
+                }
+                else
+                    break;
+            }
+
+            if (_receiveBuffer != null && _receiveBuffer.Array != null)
+            {
+                SegmentBufferDeflector.ShiftBuffer(_bufferManager, consumedLength, ref _receiveBuffer, ref _receiveBufferOffset);
+            }
+        }
+
+        #endregion
+
+        #region  Exception Handler
+
+        private void HandleSendOperationException(Exception ex)
+        {
+            if (IsSocketTimeOut(ex))
+            {
+                CloseIfShould(ex);
+                throw new TcpSocketException(ex.Message, new TimeoutException(ex.Message, ex));
+            }
+
+            CloseIfShould(ex);
+            throw new TcpSocketException(ex.Message, ex);
+        }
+
+        private void HandleUserSideError(Exception ex)
+        {
+            _log.Exception(string.Format("Session [{0}] error occurred in user side [{1}].", this, ex.Message));
+        }
+
+        private void HandleReceiveOperationException(Exception ex)
+        {
+            if (IsSocketTimeOut(ex))
+            {
+                CloseIfShould(ex);
+                throw new TcpSocketException(ex.Message, new TimeoutException(ex.Message, ex));
+            }
+
+            CloseIfShould(ex);
+            throw new TcpSocketException(ex.Message, ex);
+        }
+
+        private bool IsSocketTimeOut(Exception ex)
+        {
+            return ex is IOException
+            && ex.InnerException != null
+            && ex.InnerException is SocketException
+            && (ex.InnerException as SocketException).SocketErrorCode == SocketError.TimedOut;
+        }
+
+        private bool CloseIfShould(Exception ex)
+        {
+            if (ex is ObjectDisposedException
+                || ex is InvalidOperationException
+                || ex is SocketException
+                || ex is IOException
+                || ex is NullReferenceException // buffer array operation
+                || ex is ArgumentException      // buffer array operation
+                )
+            {
+                if (ex is SocketException)
+                    _log.Exception(string.Format("Session [{0}] exception occurred, [{1}].", this, ex.Message));
+
+                Close(true); // catch specified exception then intend to close the session
+
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
+        #region Send
+
+        public void Send(byte[] data)
+        {
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            Send(data, 0, data.Length);
+        }
+
+        public void Send(byte[] data, int offset, int count)
+        {
+            BufferValidator.ValidateBuffer(data, offset, count, "data");
+
+            if (State != TcpSocketConnectionState.Connected)
+            {
+                throw new InvalidProgramException("This session has been closed.");
+            }
+
+            try
+            {
+                byte[] frameBuffer;
+                int frameBufferOffset;
+                int frameBufferLength;
+                _configuration.FrameBuilder.Encoder.EncodeFrame(data, offset, count, out frameBuffer, out frameBufferOffset, out frameBufferLength);
+
+                _stream.Write(frameBuffer, frameBufferOffset, frameBufferLength);
+            }
+            catch (Exception ex) // catch exceptions then log then re-throw
+            {
+                HandleSendOperationException(ex);
+                throw;
+            }
+        }
+
+        public void BeginSend(byte[] data)
+        {
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            BeginSend(data, 0, data.Length);
+        }
+
+        public void BeginSend(byte[] data, int offset, int count)
+        {
+            BufferValidator.ValidateBuffer(data, offset, count, "data");
+
+            if (State != TcpSocketConnectionState.Connected)
+            {
+                throw new InvalidProgramException("This session has been closed.");
+            }
+
+            try
+            {
+                byte[] frameBuffer;
+                int frameBufferOffset;
+                int frameBufferLength;
+                _configuration.FrameBuilder.Encoder.EncodeFrame(data, offset, count, out frameBuffer, out frameBufferOffset, out frameBufferLength);
+
+                _stream.BeginWrite(frameBuffer, frameBufferOffset, frameBufferLength, HandleDataWritten, _stream);
+            }
+            catch (Exception ex) // catch exceptions then log then re-throw
+            {
+                HandleSendOperationException(ex);
+                throw;
+            }
+        }
+
+        private void HandleDataWritten(IAsyncResult ar)
+        {
+            try
+            {
+                if (_stream != null)
+                {
+                    _stream.EndWrite(ar);
+                }
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    HandleSendOperationException(ex);
+                }
+                catch (Exception innnerException)
+                {
+                    _log.Exception(innnerException);
+                }
+            }
+        }
+
+        public IAsyncResult BeginSend(byte[] data, AsyncCallback callback, object state)
+        {
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            return BeginSend(data, 0, data.Length, callback, state);
+        }
+
+        public IAsyncResult BeginSend(byte[] data, int offset, int count, AsyncCallback callback, object state)
+        {
+            BufferValidator.ValidateBuffer(data, offset, count, "data");
+
+            if (State != TcpSocketConnectionState.Connected)
+            {
+                throw new InvalidProgramException("This session has been closed.");
+            }
+
+            try
+            {
+                byte[] frameBuffer;
+                int frameBufferOffset;
+                int frameBufferLength;
+                _configuration.FrameBuilder.Encoder.EncodeFrame(data, offset, count, out frameBuffer, out frameBufferOffset, out frameBufferLength);
+
+                return _stream.BeginWrite(frameBuffer, frameBufferOffset, frameBufferLength, callback, state);
+            }
+            catch (Exception ex) // catch exceptions then log then re-throw
+            {
+                HandleSendOperationException(ex);
+                throw;
+            }
+        }
+
+        public void EndSend(IAsyncResult asyncResult)
+        {
+            HandleDataWritten(asyncResult);
         }
 
         #endregion

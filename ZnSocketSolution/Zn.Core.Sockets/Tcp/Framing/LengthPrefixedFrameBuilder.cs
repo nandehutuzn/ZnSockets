@@ -35,7 +35,11 @@ namespace Zn.Core.Sockets
 
         public void EncodeFrame(byte[] payload, int offset, int count, out byte[] frameBuffer, out int frameBufferOffset, out int frameBufferLength)
         {
-            throw new NotImplementedException();
+            var buffer = Encode(payload, offset, count, IsMasked);
+
+            frameBuffer = buffer;
+            frameBufferOffset = 0;
+            frameBufferLength = buffer.Length;
         }
 
         private static byte[] Encode(byte[] payload, int offset, int count, bool isMasked = false)

@@ -45,11 +45,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffer\BufferValidator.cs" />
     <Compile Include="Buffer\ISegmentBufferManager.cs" />
+    <Compile Include="Buffer\SegmentBufferDeflector.cs" />
     <Compile Include="Buffer\SegmentBufferManager.cs" />
     <Compile Include="Buffer\UnableToAllocateBufferException.cs" />
     <Compile Include="Buffer\UnableToCreateMemoryException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tcp\Client\APM\EventArgs\TcpServerConnectedEventArgs.cs" />
+    <Compile Include="Tcp\Client\APM\EventArgs\TcpServerDataReceivedEventArgs.cs" />
+    <Compile Include="Tcp\Client\APM\EventArgs\TcpServerDisconnectedEventArgs.cs" />
+    <Compile Include="Tcp\Client\APM\TcpSocketClient.cs" />
+    <Compile Include="Tcp\Client\APM\TcpSocketClientConfiguration.cs" />
     <Compile Include="Tcp\Framing\Base\FrameBuilder.cs" />
     <Compile Include="Tcp\Framing\Base\IFrameBuilder.cs" />
     <Compile Include="Tcp\Framing\Base\IFrameDecoder.cs" />
@@ -62,9 +69,9 @@
     <Compile Include="Tcp\Server\APM\TcpSocketServerConfiguration.cs" />
     <Compile Include="Tcp\Server\APM\TcpSocketSession.cs" />
     <Compile Include="Tcp\TcpSocketConnectionState.cs" />
+    <Compile Include="Tcp\TcpSocketException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tcp\Client\" />
     <Folder Include="Tcp\Server\EAP\" />
     <Folder Include="Tcp\Server\TAP\" />
   </ItemGroup>
