@@ -15,6 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zn.Core.Sockets.TestSocketC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zn.Core.Sockets.TestSocketServer", "Zn.Core.Sockets.TestSocketServer\Zn.Core.Sockets.TestSocketServer.csproj", "{487884EA-63FB-4213-882C-ECEF5826227D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TAP", "TAP", "{018B878D-EA3E-47C9-870E-954125F6581D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zn.Core.Sockets.TestAsyncTcpSocketClient", "Zn.Core.Sockets.TestAsyncTcpSocketClient\Zn.Core.Sockets.TestAsyncTcpSocketClient.csproj", "{4E890CB5-735B-4587-A5B6-927CAFE71587}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zn.Core.Sockets.TestAsyncTcpSocketServer", "Zn.Core.Sockets.TestAsyncTcpSocketServer\Zn.Core.Sockets.TestAsyncTcpSocketServer.csproj", "{09D73FF8-E1ED-4C88-A751-1B5EFFA2FD25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,14 @@ Global
 		{487884EA-63FB-4213-882C-ECEF5826227D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487884EA-63FB-4213-882C-ECEF5826227D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487884EA-63FB-4213-882C-ECEF5826227D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E890CB5-735B-4587-A5B6-927CAFE71587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E890CB5-735B-4587-A5B6-927CAFE71587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E890CB5-735B-4587-A5B6-927CAFE71587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E890CB5-735B-4587-A5B6-927CAFE71587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09D73FF8-E1ED-4C88-A751-1B5EFFA2FD25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D73FF8-E1ED-4C88-A751-1B5EFFA2FD25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D73FF8-E1ED-4C88-A751-1B5EFFA2FD25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D73FF8-E1ED-4C88-A751-1B5EFFA2FD25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +56,8 @@ Global
 		{DAAB3736-F517-4B8A-B36F-CDC7BFD7EDA8} = {F881FF82-106D-471B-A974-6F8417DA3474}
 		{3B091A2D-2D39-4B53-AB59-2E8FC6B97372} = {DAAB3736-F517-4B8A-B36F-CDC7BFD7EDA8}
 		{487884EA-63FB-4213-882C-ECEF5826227D} = {DAAB3736-F517-4B8A-B36F-CDC7BFD7EDA8}
+		{018B878D-EA3E-47C9-870E-954125F6581D} = {F881FF82-106D-471B-A974-6F8417DA3474}
+		{4E890CB5-735B-4587-A5B6-927CAFE71587} = {018B878D-EA3E-47C9-870E-954125F6581D}
+		{09D73FF8-E1ED-4C88-A751-1B5EFFA2FD25} = {018B878D-EA3E-47C9-870E-954125F6581D}
 	EndGlobalSection
 EndGlobal

@@ -15,7 +15,7 @@ namespace Zn.Core.Sockets.TestSocketClient
         {
             ConnectServer();
 
-            Console.WriteLine("TCP client has connected to server.");
+            Console.WriteLine("APM TCP client has connected to server.");
             Console.WriteLine("Type something to send to server...");
 
             while (true)
@@ -95,7 +95,7 @@ namespace Zn.Core.Sockets.TestSocketClient
                         _client.Send(Encoding.UTF8.GetBytes(text));
                     }
                 }
-                catch { }
+                catch(Exception ex) { Console.WriteLine(ex.Message); }
             }
 
             _client.Shutdown();

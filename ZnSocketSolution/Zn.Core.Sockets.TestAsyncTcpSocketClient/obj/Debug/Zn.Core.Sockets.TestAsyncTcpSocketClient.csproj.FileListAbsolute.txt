@@ -1,0 +1,9 @@
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\bin\Debug\Zn.Core.Sockets.TestAsyncTcpSocketClient.exe.config
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\bin\Debug\Zn.Core.Sockets.TestAsyncTcpSocketClient.exe
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\bin\Debug\Zn.Core.Sockets.TestAsyncTcpSocketClient.pdb
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\bin\Debug\Zn.Core.Sockets.dll
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\bin\Debug\Zn.Core.ToolHelpers.dll
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\bin\Debug\Zn.Core.Sockets.pdb
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\obj\Debug\Zn.Core.Sockets.TestAsyncTcpSocketClient.csprojResolveAssemblyReference.cache
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\obj\Debug\Zn.Core.Sockets.TestAsyncTcpSocketClient.exe
+E:\VS2015\Practice\ZnSocket\ZnSocketSolution\Zn.Core.Sockets.TestAsyncTcpSocketClient\obj\Debug\Zn.Core.Sockets.TestAsyncTcpSocketClient.pdb

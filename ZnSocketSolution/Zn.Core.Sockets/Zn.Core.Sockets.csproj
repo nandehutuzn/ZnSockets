@@ -57,6 +57,10 @@
     <Compile Include="Tcp\Client\APM\EventArgs\TcpServerDisconnectedEventArgs.cs" />
     <Compile Include="Tcp\Client\APM\TcpSocketClient.cs" />
     <Compile Include="Tcp\Client\APM\TcpSocketClientConfiguration.cs" />
+    <Compile Include="Tcp\Client\TAP\AsyncTcpSocketClient.cs" />
+    <Compile Include="Tcp\Client\TAP\AsyncTcpSocketClientConfiguration.cs" />
+    <Compile Include="Tcp\Client\TAP\DefaultAsyncTcpSocketClientEventDispatcher.cs" />
+    <Compile Include="Tcp\Client\TAP\IAsyncTcpSocketClientEventDispatcher.cs" />
     <Compile Include="Tcp\Framing\Base\FrameBuilder.cs" />
     <Compile Include="Tcp\Framing\Base\IFrameBuilder.cs" />
     <Compile Include="Tcp\Framing\Base\IFrameDecoder.cs" />
@@ -71,8 +75,11 @@
     <Compile Include="Tcp\Server\TAP\AsyncTcpSocketServer.cs" />
     <Compile Include="Tcp\Server\TAP\AsyncTcpSocketServerConfiguration.cs" />
     <Compile Include="Tcp\Server\TAP\AsyncTcpSocketSession.cs" />
+    <Compile Include="Tcp\Server\TAP\DefaultAsyncTcpSocketServerEventDispatcher.cs" />
+    <Compile Include="Tcp\Server\TAP\IAsyncTcpSocketServerEventDispatcher.cs" />
     <Compile Include="Tcp\TcpSocketConnectionState.cs" />
     <Compile Include="Tcp\TcpSocketException.cs" />
+    <Compile Include="TplExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tcp\Server\EAP\" />

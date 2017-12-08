@@ -14,7 +14,7 @@ namespace Zn.Core.Sockets.TestSocketServer
         {
             StartServer();
 
-            Console.WriteLine("TCP server 已经启动.");
+            Console.WriteLine("APM TCP server 已经启动.");
             Console.WriteLine("Type something to send to client...");
 
             while (true)
@@ -94,12 +94,13 @@ namespace Zn.Core.Sockets.TestSocketServer
                         _server.Broadcast(Encoding.UTF8.GetBytes(text));
                     }
                 }
-                catch
-                { }
+                catch(Exception ex)
+                { Console.WriteLine(ex.Message); }
             }
 
             _server.Shutdown();
             Console.WriteLine("TCP server has been stopped on [{0}].  服务停止", _server.ListenedEndPoint);
+            Console.ReadKey();
         }
 
         private static void StartServer()
