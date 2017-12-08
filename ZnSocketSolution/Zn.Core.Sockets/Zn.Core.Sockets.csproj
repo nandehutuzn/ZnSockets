@@ -68,12 +68,14 @@
     <Compile Include="Tcp\Server\APM\TcpSocketServer.cs" />
     <Compile Include="Tcp\Server\APM\TcpSocketServerConfiguration.cs" />
     <Compile Include="Tcp\Server\APM\TcpSocketSession.cs" />
+    <Compile Include="Tcp\Server\TAP\AsyncTcpSocketServer.cs" />
+    <Compile Include="Tcp\Server\TAP\AsyncTcpSocketServerConfiguration.cs" />
+    <Compile Include="Tcp\Server\TAP\AsyncTcpSocketSession.cs" />
     <Compile Include="Tcp\TcpSocketConnectionState.cs" />
     <Compile Include="Tcp\TcpSocketException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tcp\Server\EAP\" />
-    <Folder Include="Tcp\Server\TAP\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
